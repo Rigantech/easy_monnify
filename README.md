@@ -41,56 +41,87 @@ monnify = Monnify(apiKey="your_api_key", clientSecretKey="your_client_secret_key
     </thead>
     <tbody>
         <tr>
-            <td>Reserved Accounts<td>
+            <td>Reserved Accounts</td>
             <td>
-                - Create Reserved Account (Invoice)<br>
-                - Create Reserved Account (General)<br>
-                - Get Reserved Account Details<br>
-                - Delete Reserved Accounts<br>
-                - Add Linked Accounts<br>
-                - Update BVN for Reserved Account
+                <ul>
+                    <li>Create Reserved Account (Invoice)</li>
+                    <li>Create Reserved Account (General)</li>
+                    <li>Get Reserved Account Details</li>
+                    <li>Delete Reserved Accounts</li>
+                    <li>Add Linked Accounts</li>
+                    <li>Update BVN for Reserved Account</li>
+                </ul>
             </td>
         </tr>
         <tr>
-            <td>Transactions<td>
+            <td>Transactions</td>
             <td>
-                - Initiate A Transaction
-                - Pay With Bank Transfer
-                - Pay With Card
-                - Authroize OTP
-                - Get Transactions For A Reserved Account
-                - Get All Transactions / Search Transactions
-                - Get A Transaction Details
+                <ul>
+                    <li>Initiate A Transaction</li>
+                    <li>Pay With Bank Transfer</li>
+                    <li>Pay With Card</li>
+                    <li>Authroize OTP</li>
+                    <li>Get Transactions For A Reserved Account</li>
+                    <li>Get All Transactions / Search Transactions</li>
+                    <li>Get A Transaction Details</li>
+                </ul>
             </td>
         </tr>
         <tr>
-            <td>Sub Accounts<td>
+            <td>Sub Accounts</td>
             <td>
-                - Create Sub Account
-                - Delete Sub Account
-                - Get All Sub Accounts
-                - Update A Sub Account Info
-                - Update Split Config For A Reserved Account
+                <ul>
+                    <li>Create Sub Account</li>
+                    <li>Delete Sub Account</li>
+                    <li>Get All Sub Accounts</li>
+                    <li>Update A Sub Account Info</li>
+                    <li>Update Split Config For A Reserved Account</li>
+                </ul>
             </td>
         </tr>
         <tr>
-            <td>Transfers<td>
+            <td>Transfers</td>
             <td>
-                - Initiate A Single Transfer
-                - Authorize A Transfer / Validate OTP
-                - Resend OTP
-                - Get Transfer Status
-                - Search Transfers
-                - Get All Transfers
+                <ul>
+                    <li>Initiate A Single Transfer</li>
+                    <li>Authorize A Transfer / Validate OTP</li>
+                    <li>Resend OTP</li>
+                    <li>Get Transfer Status</li>
+                    <li>Search Transfers</li>
+                    <li>Get All Transfers</li>
+                </ul>
             </td>
         </tr>
         <tr>
-            <td>Wallet Account<td>
+            <td>Wallet Account</td>
             <td>
-                - Get Wallet Balance
-                - Get List of Banks (supported by Monnify) [See sample list](src/assets/banks.json)
-                - Get All Available Bank USSDs (supported by Monnify) [See sample list](src/assets/banks_ussd.json)
+                <ul>
+                    <li>Get Wallet Balance</li>
+                    <li>Get List of Banks (supported by Monnify) <a href="./src/assets/banks.json">See sample list</a></li>
+                    <li>Get All Available Bank USSDs (supported by Monnify) <a href="./src/assets/banks_ussd.json">See sample list</a></li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Bank Verification</td>
+            <td>
+                <ul>
+                    <li>Verify Bank Account</li>
+                    <li>Verify BVN Number (with Date of Birth)</li>
+                    <li>Verify BVN Number (with Bank Account)</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>WebHooks</td>
+            <td>
+                <ul>
+                    <li>Check Verified Valid Payment</li>
+                </ul>
             </td>
         </tr>
     </tbody>
 </table>
+
+### Usage
+[See Documentation Here](https://) for how to use the functions
