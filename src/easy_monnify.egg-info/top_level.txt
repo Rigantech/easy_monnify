@@ -1,2 +1,2 @@
 assets
-pymonnify
+easy_monnify

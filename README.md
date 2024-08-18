@@ -22,7 +22,7 @@ pip install easy_monnify
 
 First, you'll need to create an instance of the Monnify class by passing your contract code and wallet account number:
 ```python
-from  easy_monnify import Monnify
+from  easy_monnify.easy_monnify import Monnify
 
 # Initialize the Monnify class with your API key, Client Secret Key and Environment
 monnify = Monnify(apiKey="your_api_key", clientSecretKey="your_client_secret_key", environment="live")
