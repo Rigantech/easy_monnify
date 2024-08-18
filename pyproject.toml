@@ -5,12 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pymonnify"
 version = "1.0.1"
-description = "A pythoon library to seamlessly integrate Monify payment gateway into ypir projects"
+description = "A python library to seamlessly integrate Monnify payment gateway into your projects"
 license = {text = "MIT"}
 authors = [
   { name="Rigan Tech", email="rigantech@gmail.com" },
 ]
-description = "A python package to seamlessly integrate monnify payment gateway"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
