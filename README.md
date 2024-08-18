@@ -1,6 +1,6 @@
-# pymonnify
+# easy_monnify
 
-`pymonnify` is a Python library that simplifies the interaction with the Monnify payment gateway. This library wraps around the Monnify API, allowing users to make **GET** and **POST** requests to various Monnify endpoints with ease, without needing to handle the complexities of crafting HTTP requests.
+`easy_monnify` is a Python library that simplifies the interaction with the Monnify payment gateway. This library wraps around the Monnify API, allowing users to make **GET** and **POST** requests to various Monnify endpoints with ease, without needing to handle the complexities of crafting HTTP requests.
 
 ## Features
 - Simple and intuitive interface for interacting with Monnify's API.
@@ -14,7 +14,7 @@ To use this library effectively, ensure you have created an account with monnify
 
 You can install this library using pip (once it's published):
 ```bash
-pip install pymonnify
+pip install easy_monnify
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pip install pymonnify
 
 First, you'll need to create an instance of the Monnify class by passing your contract code and wallet account number:
 ```python
-from pymonnify import Monnify
+from  easy_monnify import Monnify
 
 # Initialize the Monnify class with your API key, Client Secret Key and Environment
 monnify = Monnify(apiKey="your_api_key", clientSecretKey="your_client_secret_key", environment="live")

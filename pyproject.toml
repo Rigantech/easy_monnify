@@ -3,7 +3,7 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pymonnify"
+name = "easy_monnify"
 version = "1.0.1"
 description = "A python library to seamlessly integrate Monnify payment gateway into your projects"
 license = {text = "MIT"}
@@ -22,6 +22,6 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = "https://github.com/Rigantech/pymonnify"
-repository = "https://github.com/Rigantech/pymonnify"
-Issues = "https://github.com/Rigantech/pymonnify/issues"
+homepage = "https://github.com/Rigantech/easy_monnify"
+repository = "https://github.com/Rigantech/easy_monnify"
+Issues = "https://github.com/Rigantech/easy_monnify/issues"
