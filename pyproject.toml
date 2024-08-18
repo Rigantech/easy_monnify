@@ -1,0 +1,18 @@
+[project]
+name = "pymonnify"
+version = "0.0.1"
+authors = [
+  { name="Rigan Tech", email="rigantech@gmail.com" },
+]
+description = "A python package to seamlessly integrate monnify payment gateway"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Rigantech/pymonnify"
+Issues = "https://github.com/Rigantech/pymonnify/issues"
