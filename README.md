@@ -124,4 +124,4 @@ monnify = Monnify(apiKey="your_api_key", clientSecretKey="your_client_secret_key
 </table>
 
 ### Usage
-[See Documentation Here](https://) for how to use the functions
+[See Documentation Here](https://hackode-doc-whizzydocs-projects.vercel.app/) for how to use the functions
