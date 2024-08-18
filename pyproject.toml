@@ -1,6 +1,12 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pymonnify"
-version = "0.0.1"
+version = "1.0.1"
+description = "A pythoon library to seamlessly integrate Monify payment gateway into ypir projects"
+license = {text = "MIT"}
 authors = [
   { name="Rigan Tech", email="rigantech@gmail.com" },
 ]
@@ -12,7 +18,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "requests>=2.25.0"
+]
 
 [project.urls]
-Homepage = "https://github.com/Rigantech/pymonnify"
+homepage = "https://github.com/Rigantech/pymonnify"
+repository = "https://github.com/Rigantech/pymonnify"
 Issues = "https://github.com/Rigantech/pymonnify/issues"
