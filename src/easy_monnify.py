@@ -112,14 +112,12 @@ class Monnify:
             "currencyCode": "NGN",
             "contractCode": kwargs["contractCode"],
             "redirectUrl": kwargs["redirectUrl"],
-            "paymentMethods": ["CARD", "ACCOUNT_TRANSFER"],
             "incomeSplitConfig": []
         }
         initTransaction = requests.post(url, data=json.dumps(data), headers=rHeaders)
         transaction = json.loads(initTransaction.content)
         #print("==>", reserverR)
         return transaction
-
 
     # pay with Bank Transfer
     def payWithBankTransfer(self, transactionReference, bankCode):
@@ -135,7 +133,7 @@ class Monnify:
         return transaction
 
     
-    # charge card payment
+    # charge card payment, not added
     def payWithCard(self, **kwargs):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/merchant/cards/charge'
@@ -156,7 +154,7 @@ class Monnify:
         return otpResponse
 
 
-    # authorize OTP
+    # authorize OTP, not added
     def authorizeOTP(self, transactionReference, tokenId, token):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/merchant/cards/charge'
@@ -172,7 +170,7 @@ class Monnify:
         return otpResponse
     
 
-    # get reserved account transactions
+    # get reserved account transactions, not added
     def getAccountTransactions(self, accountReference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/bank-transfer/reserved-accounts/transactions?accountReference={accountReference}&page=0&size=10'
@@ -181,7 +179,7 @@ class Monnify:
         return transObj
 
 
-    # Get all transactions
+    # Get all transactions, not added
     def getAllTransactions(self, params):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/transactions/search?'+params
@@ -193,7 +191,7 @@ class Monnify:
     """GET TRANSACTION DETAILS"""
     def getTransactionDetails(self,transactionReference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v2/transactions/'+transactionReference
+        url = f'{self.base_url}/api/v1/merchant/transactions/query?transactionReference='+transactionReference
         getTrans = requests.get(url, headers=rHeaders)
         details = json.loads(getTrans.content)
         return details
@@ -222,8 +220,8 @@ class Monnify:
     # delete subaccount
     def deleteSubAccount(self, subAccountCode):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v1/sub-accounts/'+subAccountCode
-        delete_acc = requests.post(url, headers=rHeaders)
+        url = f'{self.base_url}/api/v1/sub-accounts/?subAccountCode='+subAccountCode
+        delete_acc = requests.delete(url, headers=rHeaders)
         acc_details = json.loads(delete_acc.content)
         return acc_details
 
@@ -251,12 +249,12 @@ class Monnify:
                 "defaultSplitPercentage": kwargs["splitPercentage"]
             }
         ]
-        create_acc = requests.post(url, data=json.dumps(data), headers=rHeaders)
+        create_acc = requests.put(url, data=json.dumps(data), headers=rHeaders)
         acc_details = json.loads(create_acc.content)
         return acc_details
 
 
-    # update split config for reserved accounts
+    # update split config for reserved accounts, not added
     def updateSplitConfig(self, accountReference, **kwargs):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/bank-transfer/reserved-accounts/update-income-split-config/'+accountReference
@@ -276,15 +274,32 @@ class Monnify:
     # initiate single transfer
     def initiateSingleTransfer(self, **kwargs):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v2/disbursements/single'
+        url = f'{self.base_url}/api/v1/disbursements/single'
         data = {
-            "amount": kwargs["amount"],
+            "amount": int(kwargs["amount"]),
             "reference": kwargs["reference"],
             "narration": kwargs["narration"],
-            "destinationBankCode": kwargs["destinationBankCode"],
-            "destinationAccountNumber": kwargs["destinationAccountNumber"],
+            "bankCode": kwargs["bankCode"],
+            "accountNumber": kwargs["accountNumber"],
             "currency": "NGN",
-            "sourceAccountNumber": kwargs["sourceAccountNumber"]
+            "walletId": kwargs["walletId"]
+        }
+        initiate_transfer = requests.post(url, data=json.dumps(data), headers=rHeaders)
+        transfer = json.loads(initiate_transfer.content)
+        return transfer
+    
+    # initiate bulk transfer
+    def initiateBulkTransfer(self, **kwargs):
+        rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
+        url = f'{self.base_url}/api/v1/disbursements/batch'
+        data = {
+            "title": kwargs["title"],
+            "batchReference": kwargs["batchReference"],
+            "narration": kwargs["narration"],
+            "onValidationFailure": kwargs["onValidationFailure"],
+            "notificationInterval": 10,
+            "walletId": kwargs["walletId"],
+            "transactionList": kwargs["transactionList"]
         }
         initiate_transfer = requests.post(url, data=json.dumps(data), headers=rHeaders)
         transfer = json.loads(initiate_transfer.content)
@@ -294,7 +309,7 @@ class Monnify:
     # authorize single transfer
     def authorizeSingleTransfer(self, reference, authorizationCode):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v2/disbursements/single/validate-otp'
+        url = f'{self.base_url}/api/v1/disbursements/single/validate-otp'
         data = {
             "reference": reference,
             "authorizationCode": authorizationCode
@@ -302,12 +317,23 @@ class Monnify:
         authorize_transfer = requests.post(url, data=json.dumps(data), headers=rHeaders)
         transfer = json.loads(authorize_transfer.content)
         return transfer
-
+    
+    # authorize bulk transfer
+    def authorizeBulkTransfer(self, reference, authorizationCode):
+        rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
+        url = f'{self.base_url}/api/v1/disbursements/batch/validate-otp'
+        data = {
+            "reference": reference,
+            "authorizationCode": authorizationCode
+        }
+        authorize_transfer = requests.post(url, data=json.dumps(data), headers=rHeaders)
+        transfer = json.loads(authorize_transfer.content)
+        return transfer
     
     # resend OTP
     def resendOTP(self, reference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v2/disbursements/single/resend-otp'
+        url = f'{self.base_url}/api/v1/disbursements/single/resend-otp'
         data = {
             "reference": reference,
         }
@@ -317,9 +343,17 @@ class Monnify:
 
 
     # transfer status
-    def getTransferStatus(self, reference):
+    def getSingleTransferStatus(self, reference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f'{self.base_url}/api/v2/disbursements/single/summary?reference='+reference
+        url = f'{self.base_url}/api/v1/disbursements/single/summary?reference=?reference='+reference
+        transfer_status = requests.get(url, headers=rHeaders)
+        transfer = json.loads(transfer_status.content)
+        return transfer
+    
+    # transfer status
+    def getBulkTransferStatus(self, reference):
+        rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
+        url = f'{self.base_url}/api/v1/disbursements/batch/summary?reference=?reference='+reference
         transfer_status = requests.get(url, headers=rHeaders)
         transfer = json.loads(transfer_status.content)
         return transfer
