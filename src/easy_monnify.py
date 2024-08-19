@@ -40,7 +40,7 @@ class Monnify:
 
     #======================= Reserved Accounts ==================================
     """ Create Reserve Account v1"""
-    def createReservedAccountInvoice(self, **kwargs):
+    def createReservedAccount(self, **kwargs):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         reserveAccUrl = f"{self.base_url}/api/v1/bank-transfer/reserved-accounts"
         data = {
@@ -57,45 +57,23 @@ class Monnify:
         #print("==>", reserverR)
         return reserverR
 
-    """Create Reserve Account v2"""
-    def createReservedAccountGeneral(self, **kwargs):
-        rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        reserveAccUrl = f"{self.base_url}/api/v2/bank-transfer/reserved-accounts"
-
-        data = {
-            "accountReference": kwargs['accountReference'],
-            "accountName": kwargs['accountName'],
-            "currencyCode": "NGN",
-            "contractCode": kwargs['contractCode'],
-            "customerEmail": kwargs['customerEmail'],
-            "customerName": kwargs['customerName'],
-            "getAllAvailableBanks": True,
-        }
-        createReservedAccount = requests.post(reserveAccUrl, data=json.dumps(data), headers=rHeaders)
-        reserverR = json.loads(createReservedAccount.content)
-        #print("==>", reserverR)
-        return reserverR
-
-
     # get Reserved account details
     def getReservedAccountDetails(self, accountReference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
-        url = f"{self.base_url}/api/v2/bank-transfer/reserved-accounts/"+accountReference
+        url = f"{self.base_url}/api/v1/bank-transfer/reserved-accounts/"+accountReference
         getAccDetails = requests.get(url, headers=rHeaders)
         accDetails = json.loads(getAccDetails.content)
         return accDetails
-
 
     # delete reserved account
     def deleteReservedAccount(self, accountReference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f"{self.base_url}/api/v1/bank-transfer/reserved-accounts/"+accountReference
-        delete_account = requests.get(url, headers=rHeaders)
+        delete_account = requests.delete(url, headers=rHeaders)
         acc_details = json.loads(delete_account.content)
         return acc_details
 
-
-    # add linked accounts
+    # add linked accounts, not added
     def addLinkedAccounts(self, accountReference):
         rHeaders = {'Content-Type':"application/json", 'Authorization':"Bearer {0}".format(self.generateToken())}
         url = f'{self.base_url}/api/v1/bank-transfer/reserved-accounts/add-linked-accounts/'+accountReference
@@ -105,7 +83,6 @@ class Monnify:
         addAccount = requests.post(url, data=json.dumps(data), headers=rHeaders)
         accDetails = json.loads(addAccount.content)
         return accDetails
-
 
     # update bvn for reserved account
     def updateBVN(self, accountReference, bvn):
