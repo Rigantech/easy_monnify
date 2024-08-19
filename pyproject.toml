@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "easy_monnify"
-version = "1.0.1"
+version = "1.0.2"
 description = "A python library to seamlessly integrate Monnify payment gateway into your projects"
 license = {text = "MIT"}
 authors = [

@@ -347,7 +347,3 @@ monnify = Monnify(apiKey="your_api_key", clientSecretKey="your_client_secret_key
 
 ### Transactions
 
-
-
-
-
