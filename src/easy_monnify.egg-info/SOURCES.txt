@@ -1,8 +1,8 @@
 LICENSE
 README.md
 pyproject.toml
-src/easy_monnify/__init__.py
-src/easy_monnify/easy_monnify.py
+src/__init__.py
+src/easy_monnify.py
 src/easy_monnify.egg-info/PKG-INFO
 src/easy_monnify.egg-info/SOURCES.txt
 src/easy_monnify.egg-info/dependency_links.txt
